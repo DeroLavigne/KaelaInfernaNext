@@ -1,0 +1,8 @@
+export default function Robots() {}
+
+export async function getServerSideProps({ res }) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.write(`User-agent: *\nAllow: /\nSitemap: https://kaelainferna.com/sitemap.xml\n`);
+  res.end();
+  return { props: {} };
+}
