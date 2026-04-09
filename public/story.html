@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Story Behind the Fire — Kaela Inferna</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080608;
+    --text: #e8ddd4;
+    --muted: #7a6e68;
+    --c1: #C0255A;
+    --c2: #8B3FD9;
+    --c3: #1A90C8;
+    --c4: #2ECC71;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 8vw 8vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(192,37,90,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(139,63,217,0.12) 0%, transparent 70%),
+      #080608;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.4em;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.92;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--c1);
+  }
+
+  .hero-subtitle {
+    max-width: 480px;
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 3rem;
+  }
+
+  .hero-scroll {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    font-family: 'Bebas Neue', sans-serif;
+    position: relative;
+    z-index: 2;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* ── MEANING ── */
+  .meaning {
+    padding: 10vh 8vw;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(135deg, rgba(192,37,90,0.04) 0%, transparent 60%);
+  }
+
+  .meaning-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .meaning-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .meaning-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--text);
+  }
+
+  .meaning-name span {
+    display: block;
+    font-style: italic;
+    color: var(--c1);
+  }
+
+  .meaning-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .meaning-word {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+  }
+
+  .meaning-origin {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .meaning-block p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: #9e9490;
+  }
+
+  .meaning-block em { color: var(--text); font-style: italic; }
+
+  .meaning-together {
+    padding: 1.8rem;
+    border: 1px solid rgba(192,37,90,0.25);
+    background: rgba(192,37,90,0.04);
+  }
+
+  .meaning-together-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--c1);
+    margin-bottom: 0.8rem;
+  }
+
+  .meaning-together p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .meaning-together strong { color: var(--c1); }
+  .meaning-together em { font-style: italic; }
+
+  @media (max-width: 768px) {
+    .meaning-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    padding: 10vh 8vw;
+    max-width: 800px;
+  }
+
+  .intro p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 300;
+    line-height: 1.6;
+    color: #c9bfb8;
+  }
+
+  .intro p + p { margin-top: 1.5rem; }
+
+  .intro strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding: 0 8vw;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: calc(8vw - 1px);
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--muted) 10%, var(--muted) 90%, transparent);
+    opacity: 0.3;
+  }
+
+  /* ── ALBUM BLOCK ── */
+  .album {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 10vh 0;
+    position: relative;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .album.visible { opacity: 1; transform: translateY(0); }
+
+  .album::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 10vh;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--album-color);
+    box-shadow: 0 0 20px var(--album-color), 0 0 60px var(--album-color-dim);
+  }
+
+  .album-left { position: relative; }
+
+  .album-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 7rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .album-era {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--album-color);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .album-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .album-name em {
+    display: block;
+    font-style: italic;
+    font-size: 0.5em;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .album-concept {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    border-left: 2px solid var(--album-color);
+    background: rgba(255,255,255,0.02);
+    position: relative;
+    z-index: 2;
+  }
+
+  .album-concept-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+
+  .album-concept p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .album-right { padding-top: 1rem; }
+
+  .album-story {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #9e9490;
+  }
+
+  .album-story p + p { margin-top: 1.2rem; }
+
+  .album-story strong { color: var(--text); font-weight: 500; }
+
+  .album-tracks {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .track-pill {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .track-pill:hover {
+    border-color: var(--album-color);
+    color: var(--text);
+  }
+
+  /* ── ARC ── */
+  .arc {
+    padding: 12vh 8vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .arc-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 80% at 25% 50%, rgba(192,37,90,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 75% 50%, rgba(46,204,113,0.06) 0%, transparent 60%);
+  }
+
+  .arc h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .arc-subtitle {
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .arc-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .arc-node {
+    text-align: center;
+    padding: 0 2rem;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .arc-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .arc-dot {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .arc-album { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .arc-stage { font-size: 0.75rem; color: var(--muted); }
+
+  .arc-arrow {
+    color: rgba(255,255,255,0.1);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .arc-quote {
+    margin-top: 5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .arc-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #c9bfb8;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    padding: 12vh 8vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .closing h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing p {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: #9e9490;
+    margin-bottom: 1.2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--c1);
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    transition: gap 0.3s;
+  }
+  .back-link:hover { gap: 1.2rem; }
+
+  .closing-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .mini-album {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.3s;
+  }
+
+  .mini-album:hover { border-color: rgba(255,255,255,0.12); }
+
+  .mini-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .mini-album-name { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.1em; font-size: 0.9rem; flex: 1; }
+  .mini-count { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.2em; color: var(--text); }
+
+  @media (max-width: 768px) {
+    .album { grid-template-columns: 1fr; gap: 2rem; }
+    .album::before { display: none; }
+    .arc-flow { gap: 1rem; }
+    .arc-arrow { display: none; }
+    .closing { grid-template-columns: 1fr; gap: 3rem; }
+    .timeline::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Kaela Inferna · The Complete Story</div>
+  <h1 class="hero-title">The Story<br>Behind<br><em>the Fire</em></h1>
+  <p class="hero-subtitle">Four albums. One unbroken journey. From the first spark of rebellion to a light that belongs to everyone.</p>
+  <div class="hero-scroll">scroll to begin</div>
+</section>
+
+<!-- MEANING -->
+<section class="meaning">
+  <div class="meaning-inner">
+    <div class="meaning-left">
+      <div class="meaning-label">The Name</div>
+      <div class="meaning-name">Kaela<br><span>Inferna</span></div>
+    </div>
+    <div class="meaning-right">
+      <div class="meaning-block">
+        <div class="meaning-word">Kaela <span class="meaning-origin">/ kah-EH-lah /</span></div>
+        <p>A name rooted in the Gaelic and Celtic traditions, meaning <em>"slender" or "pure flame."</em> In older Norse usage, it carried the sense of a torch — not the fire itself, but the vessel that carries it through wind and darkness without being extinguished. The one who keeps the light alive when everything around her is trying to put it out.</p>
+      </div>
+      <div class="meaning-block">
+        <div class="meaning-word">Inferna <span class="meaning-origin">/ in-FEHR-nah /</span></div>
+        <p>From the Latin <em>infernus</em> — meaning the depths, the underworld, the place beneath the surface. Not as a place of punishment, but as the unseen interior where the most important things happen. The part of a person that the world never sees but that determines everything. <em>Inferna</em> is the fire that burns underground — invisible until the moment it becomes a volcano.</p>
+      </div>
+      <div class="meaning-together">
+        <div class="meaning-together-label">Together</div>
+        <p><strong>Kaela Inferna</strong> — <em>the pure flame that burns from the inside out.</em> A woman who does not shine because the world allows it. She shines because she cannot do otherwise. The fire was always there. This music is what happens when she stops hiding it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <p>Kaela Inferna was never just a music project. <strong>It was always a reckoning.</strong></p>
+  <p>The four albums that form this first chapter of her story are not random collections of songs — they are chapters of a single transformation. A woman who discovers her fire, burns everything down, survives the ashes, fights a broken world, and finally learns that the light she found was never only hers to keep.</p>
+  <p>This is the story of how those four albums exist together. Why this order. Why these words. And why any of it matters.</p>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline">
+
+  <!-- ALBUM 1 -->
+  <article class="album" style="--album-color: #C0255A; --album-color-dim: rgba(192,37,90,0.2);">
+    <div class="album-left">
+      <div class="album-number">01</div>
+      <div class="album-era">First Chapter · The Awakening</div>
+      <div class="album-name">Crown of Fire<em>Where it all begins.</em></div>
+      <div class="album-concept">
+        <div class="album-concept-label">Central Truth</div>
+        <p>"Nobody gives you your power. You take it."</p>
+      </div>
+    </div>
+    <div class="album-right">
+      <div class="album-story">
+        <p>There is a moment in every person's life when they decide — consciously or not — whether they will keep shrinking to fit a world that was not built for them, or whether they will take up every inch of space they deserve.</p>
+        <p><strong>Crown of Fire is that moment.</strong></p>
+        <p>The album opens with Kaela aware of her fire for the first time — not as something comfortable or beautiful, but as something dangerous, disruptive, and entirely hers. Relationships that tried to dim her. Expectations that wanted her quieter. Silences that were demanded of her. The songs don't describe these things abstractly — they name them, stand inside them, and then refuse them.</p>
+        <p><em>Shine Like a Fire</em> is not a declaration of confidence. It's a decision made in the dark, with trembling hands. By <em>Midnight Crown</em>, the crown she wears was not given — she built it from every scar, every fall, every moment someone told her she was too much.</p>
+        <p>The album ends with fire — not the comfortable kind, but the kind that changes everything it touches. Including her. And that burning will cost her everything in what comes next.</p>
+      </div>
+      <div class="album-tracks">
+        <span class="track-pill">Shine Like a Fire</span>
+        <span class="track-pill">Midnight Crown</span>
+        <span class="track-pill">Infinite Glow</span>
+        <span class="track-pill">Neon Tears</span>
+        <span class="track-pill">Phantom Glow</span>
+        <span class="track-pill">+ 7 more</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ALBUM 2 -->
+  <article class="album" style="--album-color: #8B3FD9; --album-color-dim: rgba(139,63,217,0.2);">
+    <div class="album-left">
+      <div class="album-number">02</div>
+      <div class="album-era">Second Chapter · The Transformation</div>
+      <div class="album-name">Phoenix Era<em>You have to burn first.</em></div>
+      <div class="album-concept">
+        <div class="album-concept-label">Central Truth</div>
+        <p>"Destruction is not the opposite of creation. It is part of it."</p>
+      </div>
+    </div>
+    <div class="album-right">
+      <div class="album-story">
+        <p>The fire Kaela claimed in Album One does not make her untouchable. It makes her human. And being human means that sometimes the thing burning is you.</p>
+        <p><strong>Phoenix Era is the darkest album. It is also the most necessary one.</strong></p>
+        <p>After the ignition comes the collapse — the relationships that couldn't survive her becoming herself, the identity she had to dismantle piece by piece, the grief of leaving behind a version of who she was. This is not a comfortable album. It was never meant to be.</p>
+        <p>But running underneath every track is something older than logic: <em>the soul remembers what it came here to do</em>. <em>Gravity of Souls</em> is the realization that certain connections — the ones that truly shape you — transcend any single lifetime. <em>Wings of Light</em> is the first breath after the long underwater.</p>
+        <p>By <em>Phoenix Era (Finale)</em>, the rebirth is complete. But the Kaela who emerges is not who she was before. She is something larger, quieter, and infinitely more dangerous to the world that tried to break her.</p>
+      </div>
+      <div class="album-tracks">
+        <span class="track-pill">Gravity of Souls</span>
+        <span class="track-pill">Wings of Light</span>
+        <span class="track-pill">Phoenix Era (Finale)</span>
+        <span class="track-pill">+ 9 more</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ALBUM 3 -->
+  <article class="album" style="--album-color: #1A90C8; --album-color-dim: rgba(26,144,200,0.2);">
+    <div class="album-left">
+      <div class="album-number">03</div>
+      <div class="album-era">Third Chapter · The Battle</div>
+      <div class="album-name">Digital Rebellion<em>The system is the enemy.</em></div>
+      <div class="album-concept">
+        <div class="album-concept-label">Central Truth</div>
+        <p>"You are more than your metrics. They built the system so you'd forget."</p>
+      </div>
+    </div>
+    <div class="album-right">
+      <div class="album-story">
+        <p>Reborn, conscious, and unbreakable — Kaela looks at the world with new eyes. And what she sees is not freedom. It is a different kind of cage.</p>
+        <p><strong>The digital age promised connection and delivered surveillance. Promised voice and delivered performance. Promised identity and delivered a product.</strong></p>
+        <p>Digital Rebellion is Kaela's rage. It is the loudest, most urgent, most electric album in the four — because what she is describing is not abstract philosophy but the lived daily experience of being a woman in a world where your worth is measured in followers, your thoughts are harvested as data, and your pain is packaged as content.</p>
+        <p>But this album is not nihilism. It is refusal. There is a difference between "nothing matters" and "I will not let you define what matters." Every track in Digital Rebellion is a boundary — stated loudly, over driving production, with no apology.</p>
+        <p>The battle is won not with violence but with clarity. She names the system. That is its undoing.</p>
+      </div>
+      <div class="album-tracks">
+        <span class="track-pill">+ 9 tracks</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ALBUM 4 -->
+  <article class="album" style="--album-color: #2ECC71; --album-color-dim: rgba(46,204,113,0.2);">
+    <div class="album-left">
+      <div class="album-number">04</div>
+      <div class="album-era">Fourth Chapter · The Dawn</div>
+      <div class="album-name">Aurora Rising<em>The light was never only yours.</em></div>
+      <div class="album-concept">
+        <div class="album-concept-label">Central Truth</div>
+        <p>"Once you find your light, you cannot keep it. It has to become someone else's dawn."</p>
+      </div>
+    </div>
+    <div class="album-right">
+      <div class="album-story">
+        <p>After the ignition, the transformation, and the battle — there is something that no one tells you about: <em>the quiet that follows.</em></p>
+        <p><strong>Aurora Rising is the exhale after four years of holding your breath.</strong></p>
+        <p>The aurora — that extraordinary light that appears at the horizon between night and day — is not a single color. It is all of them at once, shifting, impossible to hold, impossible to ignore. It belongs to no one and to everyone simultaneously. That is what Kaela becomes in this album.</p>
+        <p>The songs here are not only about her anymore. They are written for the woman who hasn't found her fire yet. For the girl who believes she is too broken to be anything. For everyone who needed someone to go through it first so they could believe it was survivable.</p>
+        <p>The first album started with one woman deciding to shine. The fourth album ends with that light reaching every person willing to look up.</p>
+        <p><strong>The circle is not closed. It is expanded.</strong></p>
+      </div>
+      <div class="album-tracks">
+        <span class="track-pill">+ 10 tracks</span>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ARC SUMMARY -->
+<section class="arc">
+  <div class="arc-bg"></div>
+  <h2>The Arc, Complete</h2>
+  <p class="arc-subtitle">Four albums. One unbroken thread.</p>
+
+  <div class="arc-flow">
+    <div class="arc-node">
+      <div class="arc-num">Album 01</div>
+      <div class="arc-dot" style="background: rgba(192,37,90,0.15); border: 1px solid rgba(192,37,90,0.4);">🔴</div>
+      <div class="arc-album" style="color:#C0255A;">Crown of Fire</div>
+      <div class="arc-stage">Ignition</div>
+    </div>
+    <div class="arc-arrow">→</div>
+    <div class="arc-node">
+      <div class="arc-num">Album 02</div>
+      <div class="arc-dot" style="background: rgba(139,63,217,0.15); border: 1px solid rgba(139,63,217,0.4);">🟣</div>
+      <div class="arc-album" style="color:#8B3FD9;">Phoenix Era</div>
+      <div class="arc-stage">Transformation</div>
+    </div>
+    <div class="arc-arrow">→</div>
+    <div class="arc-node">
+      <div class="arc-num">Album 03</div>
+      <div class="arc-dot" style="background: rgba(26,144,200,0.15); border: 1px solid rgba(26,144,200,0.4);">🔵</div>
+      <div class="arc-album" style="color:#1A90C8;">Digital Rebellion</div>
+      <div class="arc-stage">Battle</div>
+    </div>
+    <div class="arc-arrow">→</div>
+    <div class="arc-node">
+      <div class="arc-num">Album 04</div>
+      <div class="arc-dot" style="background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.4);">🟢</div>
+      <div class="arc-album" style="color:#2ECC71;">Aurora Rising</div>
+      <div class="arc-stage">Dawn</div>
+    </div>
+  </div>
+
+  <div class="arc-quote">
+    <blockquote>
+      "She did not become a light for the world by trying to. She became one by refusing, for long enough and at great enough cost, to stay in the dark."
+    </blockquote>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div>
+    <h2>What Comes Next</h2>
+    <p>These four albums are a closed chapter. They represent one complete arc of becoming — finished, whole, and meant to stand together as a single statement.</p>
+    <p>But Kaela Inferna is not finished. The fire that was lit in Crown of Fire doesn't go out when Aurora Rising ends. It changes form. A new story is coming — unrelated to this one in subject, connected to it in spirit.</p>
+    <p>The same voice. A different world to burn through.</p>
+    <a href="/" class="back-link">← Return to kaelainferna.com</a>
+  </div>
+  <div class="closing-visual">
+    <div class="mini-album">
+      <div class="mini-dot" style="background:#C0255A;"></div>
+      <div class="mini-album-name">Crown of Fire</div>
+      <div class="mini-count">12 tracks</div>
+    </div>
+    <div class="mini-album">
+      <div class="mini-dot" style="background:#8B3FD9;"></div>
+      <div class="mini-album-name">Phoenix Era</div>
+      <div class="mini-count">12 tracks</div>
+    </div>
+    <div class="mini-album">
+      <div class="mini-dot" style="background:#1A90C8;"></div>
+      <div class="mini-album-name">Digital Rebellion</div>
+      <div class="mini-count">9 tracks</div>
+    </div>
+    <div class="mini-album">
+      <div class="mini-dot" style="background:#2ECC71;"></div>
+      <div class="mini-album-name">Aurora Rising</div>
+      <div class="mini-count">10 tracks</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Kaela Inferna</div>
+  <div>© 2025 Martinez AI Studios · All Rights Reserved</div>
+</footer>
+
+<script>
+  // Scroll reveal for album blocks
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.album').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
